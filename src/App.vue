@@ -2,10 +2,10 @@
 	<div id="app">
 		<vue-p5 @setup="setup" @draw="draw"></vue-p5>
 		<div>
-			<div class="clickable" @click="dec1">-1</div>
-			<div class="clickable" @click="dec10">-10</div>
-			<div class="clickable" @click="inc10">+10</div>
-			<div class="clickable" @click="inc1">+1</div>
+			<div class="clickable unselectable" @click="dec1">-1</div>
+			<div class="clickable unselectable" @click="dec10">-10</div>
+			<div class="clickable unselectable" @click="inc10">+10</div>
+			<div class="clickable unselectable" @click="inc1">+1</div>
 			<div
 				class="tempo-display"
 				@click="toggleTempoInput"
@@ -19,10 +19,10 @@
 				v-model="tempo"
 				@keyup.enter="toggleTempoInput"
 			/>
-			<div @click="toggle" v-if="!toggled" class="clickable">
+			<div @click="toggle" v-if="!toggled" class="clickable unselectable">
 				PLAY
 			</div>
-			<div @click="toggle" v-if="toggled" class="clickable">
+			<div @click="toggle" v-if="toggled" class="clickable unselectable">
 				STOP
 			</div>
 		</div>
@@ -83,12 +83,12 @@ export default {
 		dec10() {
 			this.tempo -= 10;
 		},
-			inc1(){
-					this.tempo += 1;
-			},
-			dec1(){
-					this.tempo -= 1;
-			},
+		inc1() {
+			this.tempo += 1;
+		},
+		dec1() {
+			this.tempo -= 1;
+		},
 		toggleTempoInput() {
 			this.tempoInput = !this.tempoInput;
 		}
@@ -97,6 +97,12 @@ export default {
 </script>
 
 <style>
+.unselectable {
+	-webkit-user-select: none; /* Safari */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+/Edge */
+	user-select: none; /* Standard */
+}
 .clickable {
 	margin: 20px;
 	padding: 20px;
